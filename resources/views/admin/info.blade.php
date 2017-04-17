@@ -42,7 +42,7 @@
                 <label>上传附件限制</label><span><?php echo get_cfg_var ("upload_max_filesize")?get_cfg_var ("upload_max_filesize"):"不允许上传附件"; ?></span>
             </li>
             <li>
-                <label>北京时间</label><span><?php echo date('Y年m月d日 H时i分s秒')?></span>
+                <label>北京时间</label><span><?php echo date('Y年m月d日 H时i分s秒'); ?></span>
             </li>
             <li>
                 <label>服务器域名/IP</label><span>{{$_SERVER['SERVER_NAME']}} [ {{$_SERVER['SERVER_ADDR']}} ]</span>
@@ -64,9 +64,9 @@
             <li>
                 <label>官方交流网站：</label><span><a href="#">http://bbs.houdunwang.com</a></span>
             </li>
-            <li>
+{{--             <li>
                 <label>官方交流QQ群：</label><span><a href="#"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png"></a></span>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </div>

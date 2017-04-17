@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::any('admin/login', 'Admin\LoginController@login');
+Route::any('admin/captcha', 'Admin\LoginController@captcha');
+
 Route::group(['middleware' => ['admin.login'],'prefix'=>'admin','namespace'=>'Admin'], function () {
 	
     Route::get('index', 'IndexController@index');

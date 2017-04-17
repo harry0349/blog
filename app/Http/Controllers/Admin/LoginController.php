@@ -8,7 +8,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Input;
 
-require_once 'resources/org/code/Code.class.php';
+require_once '../resources/org/code/Code.class.php';
 
 class LoginController extends CommonController
 {
@@ -17,10 +17,14 @@ class LoginController extends CommonController
         if($input = Input::all()){
             $code = new \Code;
             $_code = $code->get();
-            if(strtoupper($input['code'])!=$_code){
+            if(strtoupper($input['code']) != $_code){
                 return back()->with('msg','验证码错误！');
             }
-            //$user = User::first();
+            $user = User::first();
+            var_dump($user->user_pass);
+            $a = Crypt::decrypt($user->user_pass);
+            var_dump($a);
+            exit;
             // if($user->user_name != $input['user_name'] || Crypt::decrypt($user->user_pass)!= $input['user_pass']){
             //     return back()->with('msg','用户名或者密码错误！');
             // }
@@ -40,7 +44,7 @@ class LoginController extends CommonController
         return redirect('admin/login');
     }
 
-    public function code()
+    public function captcha()
     {
         $code = new \Code;
         $code->make();
