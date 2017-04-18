@@ -15,18 +15,15 @@ class CategoryController extends CommonController
     public function index()
     {
         if(($input = Input::all()) && !empty($input['keywords'])){
-            var_dump($input['keywords']);
+
+            $categorys = (new Category)->tree($input['keywords']);
         } else {
             
+            $categorys = (new Category)->tree();
 //        $categorys = Category::tree();
-        $categorys = (new Category)->tree();
-        return view('admin.category.index')->with('data',$categorys);
         }
-    }
-
-    public function search()
-    {
-        var_dump(Input::all());
+        // var_dump($categorys);exit;
+        return view('admin.category.index')->with('data',$categorys);
     }
 
     public function changeOrder()
