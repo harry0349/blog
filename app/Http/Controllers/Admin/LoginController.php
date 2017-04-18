@@ -21,19 +21,15 @@ class LoginController extends CommonController
                 return back()->with('msg','验证码错误！');
             }
             $user = User::first();
-            var_dump($user->user_pass);
-            $a = Crypt::decrypt($user->user_pass);
-            var_dump($a);
-            exit;
-            // if($user->user_name != $input['user_name'] || Crypt::decrypt($user->user_pass)!= $input['user_pass']){
-            //     return back()->with('msg','用户名或者密码错误！');
-            // }
+            if($user->user_name != $input['user_name'] || Crypt::decrypt($user->user_pass)!= $input['user_pass']){
+                return back()->with('msg','用户名或者密码错误！');
+            }
             $user = 'admin';
             session(['user'=>$user]);
 //            dd(session('user'));
             return redirect('admin/index');
 
-        }else {
+        } else {
             return view('admin.login');
         }
     }

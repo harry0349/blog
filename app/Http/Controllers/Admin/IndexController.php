@@ -35,13 +35,12 @@ class IndexController extends CommonController
                 'password.between'=>'新密码必须在6-20位之间！',
                 'password.confirmed'=>'新密码和确认密码不一致！',
             ];
-
             $validator = Validator::make($input,$rules,$message);
 
             if($validator->passes()){
                 $user = User::first();
                 $_password = Crypt::decrypt($user->user_pass);
-                if($input['password_o']==$_password){
+                if($input['password_o'] == $_password){
                     $user->user_pass = Crypt::encrypt($input['password']);
                     $user->update();
                     return back()->with('errors','密码修改成功！');
@@ -49,6 +48,7 @@ class IndexController extends CommonController
                     return back()->with('errors','原密码错误！');
                 }
             }else{
+            //自动验证在blade上使用$errors接收，类型为对象，$errors->all()获取所有的错误
                 return back()->withErrors($validator);
             }
 

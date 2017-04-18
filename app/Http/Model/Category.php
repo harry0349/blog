@@ -11,8 +11,9 @@ class Category extends Model
     public $timestamps=false;
     protected $guarded=[];
 
-    public function tree()
-    {
+    public function tree($title = '')
+    {   
+        $search_title_pid = $this->where('title'=>$title);
         $categorys = $this->orderBy('cate_order','asc')->get();
         return $this->getTree($categorys,'cate_name','cate_id','cate_pid');
     }
