@@ -74,6 +74,12 @@
                 </td>
             </tr>
             <tr>
+                <th>内容：</th>
+                <td>
+                    <textarea id="" cols="30" rows="10" name="conf_tips">{{$field->conf_content}}</textarea>
+                </td>
+            </tr>
+            <tr>
                 <th>说明：</th>
                 <td>
                     <textarea id="" cols="30" rows="10" name="conf_tips">{{$field->conf_tips}}</textarea>
