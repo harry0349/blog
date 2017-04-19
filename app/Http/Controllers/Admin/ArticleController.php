@@ -24,6 +24,7 @@ class ArticleController extends CommonController
     {
         $data = (new Category)->tree();
         return view('admin.article.add',compact('data'));
+
     }
 
     //post.admin/article  添加文章提交
@@ -67,7 +68,7 @@ class ArticleController extends CommonController
     //put.admin/article/{article}    更新文章
     public function update($art_id)
     {
-        $input = Input::except('_token','_method');
+        $input = Input::except('_token','_method','file_upload');
         $re = Article::where('art_id',$art_id)->update($input);
         if($re){
             return redirect('admin/article');
@@ -92,5 +93,10 @@ class ArticleController extends CommonController
             ];
         }
         return $data;
+    }
+
+    public function show()
+    {
+        
     }
 }

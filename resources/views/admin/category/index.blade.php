@@ -65,7 +65,13 @@
                     </td>
                     <td class="tc">{{$v->cate_id}}</td>
                     <td>
-                        <a href="#">{{$v->_cate_name}}</a>
+                    <?php
+                        $symbol = '';
+                        for($i=1;$i<$v->deep;$i++){
+                            $symbol .= '├─ ';
+                        };
+                    ?>
+                        <a href="#">{{$symbol . $v->cate_name}}</a>
                     </td>
                     <td>{{$v->cate_title}}</td>
                     <td>{{$v->cate_view}}</td>
@@ -85,7 +91,7 @@
 <script>
     function changeOrder(obj,cate_id){
         var cate_order = $(obj).val();
-        $.post("{{url('admin/cate/changeorder')}}",{'_token':'{{csrf_token()}}','cate_id':cate_id,'cate_order':cate_order},function(data){
+        $.post("{{url('admin/cate/changeOrder')}}",{'_token':'{{csrf_token()}}','cate_id':cate_id,'cate_order':cate_order},function(data){
             if(data.status == 0){
                 layer.msg(data.msg, {icon: 6});
             }else{

@@ -22,9 +22,33 @@ class Category extends Model
         }
         $categorys = $this->orderBy('cate_order','asc')->get();
 
-        return $this->getTree($categorys, $pid);
+        return $this->nested($categorys, $pid);
     }
 
+    /**
+     * 递归,使用无限极分类
+     * @Author   [harry]
+     * @param    [array]  分类对象数组
+     * @param    integer  $pid 父id
+     * @param    integer  $deep 树深度
+     * @return   [array]  分类对象数组
+     */
+    public function nested($categorys, $pid = 0, $deep = 0)
+    {
+        ++$deep;
+        static $list = [];
+        foreach ($categorys as $key => $category) {
+            if($category->cate_pid == $pid) {
+                $category['deep'] = $deep;
+                $list[] = $category;
+                $this->nested($categorys, $category->cate_id, $deep);
+            }
+        }
+        return $list;
+    }
+
+
+    /*废弃不用*/
     public function getTree($data, $pid = 0)
     {
         $arr = [];
@@ -43,6 +67,5 @@ class Category extends Model
         }
 
         return $arr;
-
     }
 }

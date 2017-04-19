@@ -49,7 +49,7 @@ class CategoryController extends CommonController
     //get.admin/category/create   添加分类
     public function create()
     {
-        $data = Category::where('cate_pid',0)->get();
+        $data = (new Category)->tree();
         return view('admin/category/add',compact('data'));
     }
 
